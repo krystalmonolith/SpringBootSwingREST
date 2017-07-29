@@ -12,16 +12,14 @@ public class GUI {
 
     private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
-    private String label;
     private JFrame frame;
-    private JLabel label1;
-    private JTextField text1;
+    private JLabel lblPrompt;
+    private JTextField txtText;
     private JButton btnExit;
 
     private IGUIDOM guiDOM;
 
     public GUI() {
-        this.label = new Date().toString();
     }
 
     public IGUIDOM getGuiDOM() {
@@ -35,39 +33,49 @@ public class GUI {
             GridBagLayout gbl = new GridBagLayout();
             frame.getContentPane().setLayout(gbl);
 
-            label1 = new JLabel("TEXT1:");
-            text1 = new JTextField();
+            lblPrompt = new JLabel("TEXT1:");
+            txtText = new JTextField();
             btnExit = new JButton("Exit");
 
             GridBagConstraints gbc;
             gbc = new GridBagConstraints(0, 0, 1, 1, 0.01, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, INSETS, 1, 1);
-            frame.getContentPane().add(label1, gbc);
+            frame.getContentPane().add(lblPrompt, gbc);
             gbc = new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, INSETS, 1, 1);
-            frame.getContentPane().add(text1, gbc);
+            frame.getContentPane().add(txtText, gbc);
             gbc = new GridBagConstraints(0, 1, 2, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, INSETS, 1, 1);
             frame.getContentPane().add(btnExit, gbc);
             frame.pack();
             frame.setVisible(true);
             frame.setMinimumSize(new Dimension(400,0));
-            //text1.setMinimumSize(new Dimension(200,0));
+            //txtText.setMinimumSize(new Dimension(200,0));
 
             btnExit.addActionListener((ActionEvent actionEvent) -> {
                 guiActions.exit();
             });
 
-            text1.addActionListener((ActionEvent actionEvent) -> {
-                guiActions.text1(text1.getText());
+            txtText.addActionListener((ActionEvent actionEvent) -> {
+                guiActions.text1(txtText.getText());
             });
 
             guiDOM = new IGUIDOM() {
                 @Override
-                public String getText1() {
-                    return text1.getText();
+                public String getText() {
+                    return txtText.getText();
                 }
 
                 @Override
-                public void setText1(String text) {
-                    text1.setText(text);
+                public void setText(String text) {
+                    txtText.setText(text);
+                }
+
+                @Override
+                public String getPrompt() {
+                    return lblPrompt.getText();
+                }
+
+                @Override
+                public void setPrompt(String prompt) {
+                    lblPrompt.setText(prompt);
                 }
             };
         });
