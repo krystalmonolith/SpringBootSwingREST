@@ -1,4 +1,4 @@
-package com.alphapulsar;
+package com.alphapulsar.sb01;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

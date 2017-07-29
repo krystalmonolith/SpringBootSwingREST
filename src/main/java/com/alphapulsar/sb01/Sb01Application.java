@@ -1,4 +1,4 @@
-package com.alphapulsar;
+package com.alphapulsar.sb01;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
