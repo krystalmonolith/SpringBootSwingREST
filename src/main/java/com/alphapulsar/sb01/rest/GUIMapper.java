@@ -2,8 +2,6 @@ package com.alphapulsar.sb01.rest;
 
 import com.alphapulsar.sb01.gui.GUI;
 import com.alphapulsar.sb01.gui.IGUIDOM;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,17 +13,18 @@ import java.util.Optional;
 @RestController
 public class GUIMapper {
 
-    private Optional<GUI> gui;
+    private GUI gui;
 
     public GUIMapper(@Autowired GUI gui) {
-        this.gui = Optional.ofNullable(gui);
+        this.gui = gui;
     }
 
     @PutMapping("/gui/text1/{text}")
     public @ResponseBody ResponseEntity<String> putText1(@PathVariable("text") String text) {
         String oldText = "";
-        if (gui.isPresent()) {
-            final IGUIDOM guiDOM = gui.get().getGuiDOM();
+        Optional<IGUIDOM> guiDOMOpt = Optional.ofNullable(gui.getGuiDOM());
+        if (guiDOMOpt.isPresent()) {
+            final IGUIDOM guiDOM = guiDOMOpt.get();
             oldText = guiDOM.getText1();
             guiDOM.setText1(text);
         } else {
@@ -36,7 +35,13 @@ public class GUIMapper {
 
     @GetMapping("/gui/text1")
     public @ResponseBody ResponseEntity<String> getText1() {
-        String text = gui.get().getGuiDOM().getText1();
+        String text = "";
+        Optional<IGUIDOM> guiDOMOpt = Optional.ofNullable(gui.getGuiDOM());
+        if (guiDOMOpt.isPresent()) {
+            text = guiDOMOpt.get().getText1();
+        } else {
+            return new ResponseEntity<>("GUI DOM Unavailable!", HttpStatus.SERVICE_UNAVAILABLE);
+        }
         return new ResponseEntity<>(HtmlUtils.htmlEscape(text), HttpStatus.OK);
     }
 }
