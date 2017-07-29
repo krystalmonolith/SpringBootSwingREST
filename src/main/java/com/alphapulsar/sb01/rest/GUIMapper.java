@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.HtmlUtils;
 
 import java.util.Optional;
 
@@ -20,31 +19,58 @@ public class GUIMapper {
         this.gui = gui;
     }
 
-    @PutMapping("text1/{text}")
-    public ResponseEntity<PutResponse> putText1(@PathVariable("text") String text) {
-        PutResponse putResponse = new PutResponse();
-        Optional<IGUIDOM> guiDOMOpt = Optional.ofNullable(gui.getGuiDOM());
-        if (guiDOMOpt.isPresent()) {
-            final IGUIDOM guiDOM = guiDOMOpt.get();
-            putResponse.setOldText(guiDOM.getText1());
-            guiDOM.setText1(text);
-        } else {
-            putResponse.setOldText("GUI DOM Unavailable!");
-            return new ResponseEntity<>(putResponse, HttpStatus.SERVICE_UNAVAILABLE);
-        }
-        return new ResponseEntity<>(putResponse, HttpStatus.OK);
+    @PutMapping("text/{text}")
+    public ResponseEntity<PutResponse> putText(@PathVariable("text") String text) {
+        return processPut((IGUIDOM guiDOM, RESTResponse restResponse) -> {
+            ((PutResponse)restResponse).setOldText(guiDOM.getText());
+            guiDOM.setText(text);
+        });
     }
 
-    @GetMapping("text1")
-    public ResponseEntity<GetResponse> getText1() {
+    @GetMapping("text")
+    public ResponseEntity<GetResponse> getText() {
+        return processGet((IGUIDOM guiDOM, RESTResponse restResponse) -> {
+            ((GetResponse)restResponse).setText(guiDOM.getText());
+        });
+    }
+
+    @PutMapping("prompt/{prompt}")
+    public ResponseEntity<PutResponse> putPrompt(@PathVariable("prompt") String prompt) {
+        return processPut((IGUIDOM guiDOM, RESTResponse restResponse) -> {
+            ((PutResponse)restResponse).setOldText(guiDOM.getPrompt());
+            guiDOM.setPrompt(prompt);
+        });
+    }
+
+    @GetMapping("prompt")
+    public ResponseEntity<GetResponse> getPrompt() {
+        return processGet((IGUIDOM guiDOM, RESTResponse restResponse) -> {
+            ((GetResponse)restResponse).setText(guiDOM.getPrompt());
+        });
+    }
+
+    private interface IDelegate {
+        void process(IGUIDOM guiDOM, RESTResponse putResponse);
+    }
+
+    private ResponseEntity<PutResponse> processPut(IDelegate delegate) {
+        PutResponse putResponse = new PutResponse();
+        return processREST(delegate, putResponse);
+    }
+
+    private ResponseEntity<GetResponse> processGet(IDelegate delegate) {
         GetResponse getResponse = new GetResponse();
+        return processREST(delegate, getResponse);
+    }
+
+    private <T extends RESTResponse> ResponseEntity<T> processREST(IDelegate delegate, T response) {
         Optional<IGUIDOM> guiDOMOpt = Optional.ofNullable(gui.getGuiDOM());
         if (guiDOMOpt.isPresent()) {
-            getResponse.setText(HtmlUtils.htmlEscape(guiDOMOpt.get().getText1()));
+            delegate.process(guiDOMOpt.get(), response);
         } else {
-            getResponse.setText("GUI DOM Unavailable!");
-            return new ResponseEntity<>(getResponse, HttpStatus.SERVICE_UNAVAILABLE);
+            response.setError("GUI DOM Unavailable!");
+            return new ResponseEntity<>(response, HttpStatus.SERVICE_UNAVAILABLE);
         }
-        return new ResponseEntity<>(getResponse, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
