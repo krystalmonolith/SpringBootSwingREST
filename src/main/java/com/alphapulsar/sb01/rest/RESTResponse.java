@@ -5,24 +5,27 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class RESTResponse {
+class RESTResponse {
     private LocalDateTime localDateTime;
     private String error;
 
-    public RESTResponse() {
+    RESTResponse() {
         localDateTime = LocalDateTime.now();
     }
 
-    public String getLocalDateTime() {
+    @SuppressWarnings("unused")
+    String getLocalDateTime() {
         return localDateTime.format(DateTimeFormatter.ISO_DATE_TIME);
     }
 
+    @SuppressWarnings("unused")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String getError() {
+    String getError() {
         return error;
     }
 
-    public void setError(String error) {
+    @SuppressWarnings("unused")
+    void setError(String error) {
         this.error = error;
     }
 }

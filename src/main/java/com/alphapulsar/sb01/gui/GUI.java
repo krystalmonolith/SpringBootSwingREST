@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.Date;
 
 @Component
@@ -49,13 +48,8 @@ public class GUI {
             frame.setMinimumSize(new Dimension(400,0));
             //txtText.setMinimumSize(new Dimension(200,0));
 
-            btnExit.addActionListener((ActionEvent actionEvent) -> {
-                guiActions.exit();
-            });
-
-            txtText.addActionListener((ActionEvent actionEvent) -> {
-                guiActions.text1(txtText.getText());
-            });
+            btnExit.addActionListener(actionEvent -> guiActions.exit());
+            txtText.addActionListener(actionEvent -> guiActions.text1(txtText.getText()));
 
             guiDOM = new IGUIDOM() {
                 @Override
