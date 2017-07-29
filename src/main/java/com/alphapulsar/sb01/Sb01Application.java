@@ -22,7 +22,6 @@ public class Sb01Application implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) {
-//		SpringApplication.run(Sb01Application.class, args);
 		SpringApplicationBuilder builder = new SpringApplicationBuilder(Sb01Application.class);
 		builder.headless(false);
 		SpringApplication application  = builder.build();

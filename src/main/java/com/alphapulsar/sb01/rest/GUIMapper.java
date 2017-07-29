@@ -11,6 +11,7 @@ import org.springframework.web.util.HtmlUtils;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/gui")
 public class GUIMapper {
 
     private GUI gui;
@@ -19,8 +20,8 @@ public class GUIMapper {
         this.gui = gui;
     }
 
-    @PutMapping("/gui/text1/{text}")
-    public @ResponseBody ResponseEntity<String> putText1(@PathVariable("text") String text) {
+    @PutMapping("text1/{text}")
+    public ResponseEntity<String> putText1(@PathVariable("text") String text) {
         String oldText = "";
         Optional<IGUIDOM> guiDOMOpt = Optional.ofNullable(gui.getGuiDOM());
         if (guiDOMOpt.isPresent()) {
@@ -33,8 +34,8 @@ public class GUIMapper {
         return new ResponseEntity<>(HtmlUtils.htmlEscape(oldText), HttpStatus.OK);
     }
 
-    @GetMapping("/gui/text1")
-    public @ResponseBody ResponseEntity<String> getText1() {
+    @GetMapping("text1")
+    public ResponseEntity<String> getText1() {
         String text = "";
         Optional<IGUIDOM> guiDOMOpt = Optional.ofNullable(gui.getGuiDOM());
         if (guiDOMOpt.isPresent()) {

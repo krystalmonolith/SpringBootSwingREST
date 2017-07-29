@@ -10,7 +10,7 @@ import java.util.Date;
 @Component
 public class GUI {
 
-    private static final Insets INSETS = new Insets(2,2,2,2);
+    private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
     private String label;
     private JFrame frame;
@@ -30,24 +30,26 @@ public class GUI {
 
     public void createAndShowGUI(final IGUIActions guiActions) {
         javax.swing.SwingUtilities.invokeLater(() -> {
-            frame = new JFrame("Sb01");
+            frame = new JFrame("Sb01: " + new Date().toString());
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             GridBagLayout gbl = new GridBagLayout();
             frame.getContentPane().setLayout(gbl);
 
-            label1 = new JLabel(label);
+            label1 = new JLabel("TEXT1:");
             text1 = new JTextField();
             btnExit = new JButton("Exit");
 
             GridBagConstraints gbc;
-            gbc = new GridBagConstraints(0,0,1,1,1.0,1.0,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, INSETS, 1, 1);
+            gbc = new GridBagConstraints(0, 0, 1, 1, 0.01, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, INSETS, 1, 1);
             frame.getContentPane().add(label1, gbc);
-            gbc = new GridBagConstraints(0,1,1,1,1.0,1.0,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, INSETS, 1, 1);
+            gbc = new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, INSETS, 1, 1);
             frame.getContentPane().add(text1, gbc);
-            gbc = new GridBagConstraints(0,2,1,1,1.0,1.0,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, INSETS, 1, 1);
+            gbc = new GridBagConstraints(0, 1, 2, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, INSETS, 1, 1);
             frame.getContentPane().add(btnExit, gbc);
             frame.pack();
             frame.setVisible(true);
+            frame.setMinimumSize(new Dimension(400,0));
+            //text1.setMinimumSize(new Dimension(200,0));
 
             btnExit.addActionListener((ActionEvent actionEvent) -> {
                 guiActions.exit();
