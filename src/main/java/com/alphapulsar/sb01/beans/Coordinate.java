@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 @Component()
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Coordinate {
-    private double x;
-    private double y;
-    private double z;
+    private Double x;
+    private Double y;
+    private Double z;
 
     public Coordinate(double x, double y, double z) {
         this.x = x;
