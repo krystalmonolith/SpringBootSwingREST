@@ -1,6 +1,8 @@
 package com.alphapulsar.sb01;
 
 import com.alphapulsar.sb01.gui.GUI;
+import com.alphapulsar.sb01.gui.IGUIActions;
+import com.alphapulsar.sb01.gui.IGUIDOM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +11,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
+import java.util.ArrayList;
+
 @SpringBootApplication
 public class Sb01Application implements CommandLineRunner {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Sb01Application.class);
 
-	@Autowired
 	private GUI gui;
+
+	public Sb01Application(@Autowired GUI gui) {
+		this.gui = gui;
+	}
 
 	public static void main(String[] args) {
 //		SpringApplication.run(Sb01Application.class, args);
@@ -28,6 +35,16 @@ public class Sb01Application implements CommandLineRunner {
 	@Override
 	public void run(String... strings) throws Exception {
 		LOGGER.info("RUN!");
-		gui.createAndShowGUI();
+		gui.createAndShowGUI(new IGUIActions() {
+            @Override
+            public void text1(String text) {
+                LOGGER.info("GUI.TEXT1: \"" + text + "\"");
+            }
+
+            @Override
+            public void exit() {
+                System.exit(0);
+            }
+        });
 	}
 }
