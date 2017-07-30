@@ -1,0 +1,77 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Sb01",
+		"_postman_id": "8228944e-955e-515c-101b-b2a93f9a3da2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET http://127.0.0.1:8080/gui/text",
+			"request": {
+				"url": "http://127.0.0.1:8080/gui/text",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET http://127.0.0.1:8080/gui/prompt",
+			"request": {
+				"url": "http://127.0.0.1:8080/gui/prompt",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT http://127.0.0.1:8080/gui/text/whats%20up%25%25",
+			"request": {
+				"url": "http://127.0.0.1:8080/gui/text/whats%20up%25%25",
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT http://127.0.0.1:8080/gui/prompt/NAME:",
+			"request": {
+				"url": "http://127.0.0.1:8080/gui/prompt/NAME:",
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT http://127.0.0.1:8080/gui/prompt/ADDRESS:",
+			"request": {
+				"url": "http://127.0.0.1:8080/gui/prompt/ADDRESS:",
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT http://127.0.0.1:8080/gui/text/whats%20up%201111",
+			"request": {
+				"url": "http://127.0.0.1:8080/gui/text/whats%20up%201111",
+				"method": "PUT",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
