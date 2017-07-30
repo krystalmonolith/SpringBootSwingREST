@@ -1,15 +1,13 @@
 package com.alphapulsar.sb01.rest;
 
-class PutResponse extends RESTResponse {
+public class PutResponse extends RESTResponse {
     private String oldText;
 
-    @SuppressWarnings("unused")
-    String getOldText() {
+    public String getOldText() {
         return oldText;
     }
 
-    @SuppressWarnings("unused")
-    void setOldText(String oldText) {
+    public void setOldText(String oldText) {
         this.oldText = oldText;
     }
 }

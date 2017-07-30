@@ -29,8 +29,9 @@ public class GUIMapper {
 
     @GetMapping("text")
     public ResponseEntity<GetResponse> getText() {
-        return processGet((IGUIDOM guiDOM, RESTResponse restResponse) -> ((GetResponse)restResponse).setText(guiDOM.getText())
-        );
+        return processGet((IGUIDOM guiDOM, RESTResponse restResponse) -> {
+            ((GetResponse)restResponse).setText(guiDOM.getText());
+        });
     }
 
     @PutMapping("prompt/{prompt}")
@@ -43,7 +44,9 @@ public class GUIMapper {
 
     @GetMapping("prompt")
     public ResponseEntity<GetResponse> getPrompt() {
-        return processGet((IGUIDOM guiDOM, RESTResponse restResponse) -> ((GetResponse)restResponse).setText(guiDOM.getPrompt()));
+        return processGet((IGUIDOM guiDOM, RESTResponse restResponse) -> {
+            ((GetResponse)restResponse).setText(guiDOM.getPrompt());
+        });
     }
 
     private interface IDelegate {
