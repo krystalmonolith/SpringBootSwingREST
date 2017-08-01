@@ -1,5 +1,5 @@
-# SwingBootSwingREST
-Basic Spring Boot application that puts up a trivial J2SE Swing interface, and also services REST GET/PUT endpoints for the Swing app's prompt JLabel and JTextField.
+# SpringBootSwingREST
+This is a basic Spring Boot application that displays a trivial J2SE Swing interface, and also services REST GET/PUT endpoints for the Swing app's prompt JLabel and JTextField.
 
  ## REST Endpoints
  - GET Text from JTextField: http://127.0.0.1:8080/gui/text
